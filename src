@@ -1,0 +1,226 @@
+#include<stdio.h>
+
+int i, QCourse,age;
+float ntpayment,discount,fees[]={100,120,130},tpayment=0, tpaymentd, newcalc, newcalc_d, nfees;
+char code[],ncode, add;
+
+void displaymenu();
+int infoCourse();
+float calcFee(int QCourse, float tpayment, float tpaymentd);
+float calcPayment (float tpayment);
+float addFee(float ntpayment);
+
+int main()
+{
+	displaymenu();
+	QCourse = infoCourse();
+	tpayment = calcFee(QCourse, tpayment ,tpaymentd);
+	tpaymentd = calcPayment(tpayment);
+	ntpayment = addFee(ntpayment);
+	
+	return 0;
+}
+void displaymenu()
+{
+	printf("\t\t\tWelcome to CS Training Center\n\n");
+	printf("--------------------------------------------------------------------------\n");
+	printf("|  COURSE CODE  |    COURSE NAME    |   DAY   |     TIME      |   FEES   |\n");
+	printf("|---------------|-------------------|---------|---------------|----------|\n");
+	printf("|       A       |  C for beginner   |  Monday | 8.00 -10.00pm | RM100.00 |\n");
+	printf("|---------------|-------------------|---------|---------------|----------|\n");
+	printf("|       B       | C++ for beginner  | Tuesday | 8.00 -10.00pm | RM100.00 |\n");
+	printf("|---------------|-------------------|---------|---------------|----------|\n");
+	printf("|       C       | Java for beginner |Wednesday| 8.00 -10.00pm | RM120.00 |\n");
+	printf("|---------------|-------------------|---------|---------------|----------|\n");
+	printf("|       D       |Phyton for beginner|Thursday | 8.00 -10.00pm | RM120.00 |\n");
+	printf("|---------------|-------------------|---------|---------------|----------|\n");
+	printf("|       E       |  PHP for beginner |  Friday | 8.00 -10.00pm | RM130.00 |\n");
+	printf("--------------------------------------------------------------------------\n");
+	printf("*15%% Discount with total fees more than RM300.00.\n");
+}
+int infoCourse()
+{
+	char name[30];
+	int age, QCourse;
+	printf("\nEnter Name: ");
+	scanf("%s",&name);
+	printf("Enter Age: ");
+	scanf("%d",&age);
+	printf("Enter Quantity of course: ");
+	scanf("%d",&QCourse);
+	printf("\n------------------------\n");
+	return QCourse;
+}
+float calcFee(int QCourse, float tpayment, float tpaymentd)
+{	
+	for(i=0 ; i < QCourse ; i++)
+	{
+		printf("Enter Course code: ");
+		scanf(" %c", &code[i]);
+		
+		while(code[i]!='A'&&code[i]!='B'&&code[i]!='C'&&code[i]!='D'&&code[i]!='E'&&code[i]!='a'&&code[i]!='b'&&code[i]!='c'&&code[i]!='d'&&code[i]!='e')
+		{
+			printf("\nInvalid Course Code");
+			printf("\nEnter the course code:");
+			scanf(" %c", &code[i]);
+		}
+			switch (code[i])
+			{
+				case 'A':					
+					fees[i] = 100;
+					tpayment = tpayment + fees[i];
+					break; 
+				case 'B':
+					fees[i] = 100;
+					tpayment = tpayment + fees[i];
+					break; 
+				case 'C': 
+					fees[i] = 120;
+					tpayment = tpayment + fees[i];
+					break; 
+				case 'D': 					
+					fees[i] = 120;
+					tpayment = tpayment + fees[i];
+					break; 
+				case 'E':					
+					fees[i] = 130;
+					tpayment = tpayment + fees[i];
+					break;
+				case 'a':					
+					fees[i] = 100;
+					tpayment = tpayment + fees[i];
+					break; 
+				case 'b':					
+					fees[i] = 100;
+					tpayment = tpayment + fees[i];
+					break; 
+				case 'c': 					
+					fees[i] = 120;
+					tpayment = tpayment + fees[i];
+					break; 
+				case 'd': 					
+					fees[i] = 120;
+					tpayment = tpayment + fees[i];
+					break; 
+				case 'e':					
+					fees[i] = 130;
+					tpayment = tpayment + fees[i];
+					break;							
+			}
+	}
+	return tpayment;
+}
+float calcPayment (float tpayment)
+{
+	if(tpayment > 300)
+	{
+		discount = tpayment*0.15;
+		tpaymentd = tpayment - discount;
+	}
+	printf("\n----------------------------");
+	printf("\n|Course Taken |\t   Fees    |");
+	printf("\n|-------------|------------|");
+
+	for(i=0 ; i < QCourse; i++)
+		printf("\n|      %c      |  RM%.2f  |",code[i],fees[i]);
+
+	printf("\n----------------------------");
+	printf("\nTotal payment : RM%.2f", tpayment);
+	printf("\nDiscounted Payment: RM%.2f", tpaymentd);
+	
+	return tpayment;
+}
+float addFee(float ntpayment)	
+{
+	printf("\nWould you like to add a course ? (Y/N): ");
+	scanf("	%c", &add);
+		
+	if (add=='Y' || add=='y')
+	{
+		printf("Enter Course code: ");
+		scanf(" %c", &ncode);
+	
+		while(ncode!='A'&&ncode!='B'&&ncode!='C'&&ncode!='D'&&ncode!='E'&&ncode!='a'&&ncode!='b'&&ncode!='c'&&ncode!='d'&&ncode!='e')
+		{
+			printf("\nInvalid Course Code");
+			printf("\nEnter the course code:");
+			scanf(" %c", &ncode);
+		}
+		for(i=0; i<QCourse ; i++)
+		{				
+			if(ncode == code[i])
+			{				
+				printf("Error : Please register in a new form to add Course");
+				break;
+			}
+			else if(ncode != code[i])
+			{
+				switch (ncode)
+				{
+				case 'A':					
+					nfees = 100;
+					ntpayment = ntpayment + nfees;
+					break; 
+				case 'B':
+					nfees = 100;
+					ntpayment = ntpayment + nfees;
+					break; 
+				case 'C': 
+					nfees = 120;
+					ntpayment = ntpayment + nfees;
+					break; 
+				case 'D': 					
+					nfees = 120;
+					ntpayment = ntpayment + nfees;
+					break; 
+				case 'E':					
+					nfees = 130;
+					ntpayment = ntpayment + nfees;
+					break;
+				case 'a':					
+					nfees = 100;
+					ntpayment = ntpayment + nfees;
+					break; 
+				case 'b':					
+					nfees = 100;
+					ntpayment = ntpayment + nfees;
+					break; 
+				case 'c': 					
+					nfees = 120;
+					ntpayment = ntpayment + nfees;
+					break; 
+				case 'd': 					
+					nfees = 120;
+					ntpayment = ntpayment + nfees;
+					break; 
+				case 'e':					
+					nfees = 130;
+					ntpayment = ntpayment + nfees;
+					break;		
+      			}   
+      			
+				if (tpayment>=300)
+					newcalc=tpaymentd + ntpayment;
+				else 
+					newcalc= tpayment + ntpayment;
+	
+				if (newcalc>=300)
+					newcalc_d=newcalc*0.85;
+					
+				printf("\n----------------------------");
+				printf("\n|Course Taken |\t   Fees    |");
+				printf("\n|-------------|------------|");
+	
+				for(i=0;i<QCourse;i++)
+					printf("\n|      %c      |  RM%.2f  |",code[i],fees[i]);
+					
+				printf("\n|      %c      |  RM%.2f  |",ncode,nfees);
+				printf("\n----------------------------");
+		
+				printf("\nTotal after addition: RM%.2f\n", newcalc);
+				printf("Total after addition & discount: RM%.2f\n", newcalc_d);
+				break;
+			}										
+		}
+	}
+}
